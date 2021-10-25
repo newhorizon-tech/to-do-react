@@ -1,17 +1,16 @@
 const TodoItem = (props) => {
-  console.log(props);
-  const {task} = props;
+  const {task, deleteItem} = props;
 
   const deleteItem = (e) => {
-    console.log("Delete" + e.target);
+    console.log(e.target.parentElement);
   }
 
   const statusItem = (e) => {
-    console.log("Toggle Status" + e.target)
+    console.log(e.target.parentElement)
   }
 
   return(
-    <li className = "todo-item">
+    <li className = "todo-item" id= {`item-${task.index}`}>
       <input  className="item-status" type = "checkbox" onClick = {statusItem} />
       <span className="item-delete"> {task.description} </span>
       <button className="item-delete" onClick = {deleteItem} > Delete </button>
