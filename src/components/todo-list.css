@@ -1,27 +1,55 @@
+:root {
+  --blue: #094d82;
+  --dark: #1f2933;
+  --green: #00897B;
+  --something: #162c35;
+}
+
+body {
+  background-color: var(--green);
+  color: white;
+}
+
+button {
+  padding: 5px;
+  background-color: var(--blue);
+  color: #e4e7eb;
+  border: none;
+  border-radius: none;
+  border-shadow: none;
+}
+
 h1 {
   text-align: center;
   width: 50%;
-  margin: 20px auto;
+  margin: 40px auto 10px;
 }
 
 #todo-list {
   display: flex;
   flex-direction: column;
-  margin: 40px auto;
+  margin: 5px auto;
   width: 500px;
   padding: 5px 0;
-  border: 1px solid black;
   list-style-type: none;
 }
 
-#todo-list .todo-item {
+#todo-list .todo-item, #input-todo  {
   margin: 5px 5px;
   padding: 5px 5px;
   display: grid;
   grid-template-columns:  0.5fr 4fr 1fr;
 }
 
-#todo-list .todo-item button {
+
+/* button {
   padding: 5px;
-  background-color: white;
+  background-color: #162c35;
+} */
+
+#input-todo {
+  grid-template-columns: 4fr 1fr;
+  grid-gap: 5px;
+  padding: 10px 2px;
+  border-bottom: 10px solid var(--white);
 }

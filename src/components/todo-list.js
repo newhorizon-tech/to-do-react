@@ -29,7 +29,6 @@ const TodoList = () => {
   return(
     <>
       <ul id = "todo-list">
-        <h1> To Do List </h1>
         <InputTodo addTask ={addTask} />
         {tasks.map((task) => (<TodoItem key={task.index} task={task} deleteTask={deleteTask} />))}
       </ul>
