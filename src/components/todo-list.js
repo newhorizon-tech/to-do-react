@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import TodoItem from './todo-item';
 import InputTodo from './input-todo';
 import './todo-list.css';
@@ -9,11 +9,11 @@ const TodoList = () => {
             {description : "Item Three", status: false, index: 3 },
             {description : "Item Four", status: false, index: 4 },]
 
-  const [tasks, setTask] = useState(initialTasks);
+  const [tasks, setTasks] = useState(initialTasks);
 
   const deleteTask = (e) => {
     const taskId= Number(e.target.parentElement.id.split("-")[1]);
-    setTask(prevTasks => prevTasks.filter(task => (task.index !== taskId)) );
+    setTasks(prevTasks => prevTasks.filter(task => (task.index !== taskId)) );
   }
 
   const addTask = (e) => {
@@ -23,8 +23,19 @@ const TodoList = () => {
      inputElement.value = '';
 
      const newTask = {description : taskDescription, status: false };
-     setTask(prevTasks => [...prevTasks, {...newTask, index: prevTasks.length +1}]);
+     setTasks(prevTasks => [...prevTasks, {...newTask, index: prevTasks.length +1}]);
   }
+
+  // Load from local storage
+  useEffect(() => {
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    if (tasks) {
+      setTasks(tasks)
+    }
+  }, [])
+
+  // Save to local storage
+  useEffect(() => localStorage.setItem("tasks", JSON.stringify(tasks)), [tasks]);
 
   return(
     <>
