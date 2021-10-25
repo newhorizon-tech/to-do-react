@@ -11,6 +11,11 @@ const TodoList = () => {
 
   const [tasks, setTask] = useState(initialTasks);
 
+  const deleteTask = (e) => {
+    const taskId= Number(e.target.parentElement.id.split("-")[1]);
+    setTask(prevTasks => prevTasks.filter(task => (task.index !== taskId)) );
+  }
+
   const addTask = (e) => {
      e.preventDefault();
      const inputElement = e.target.querySelector("input")
@@ -24,8 +29,9 @@ const TodoList = () => {
   return(
     <>
       <ul id = "todo-list">
-        <InputTodo addTask ={addTask} /> 
-        {tasks.map((task) => (<TodoItem key={task.index} task={task} />))}
+        <h1> To Do List </h1>
+        <InputTodo addTask ={addTask} />
+        {tasks.map((task) => (<TodoItem key={task.index} task={task} deleteTask={deleteTask} />))}
       </ul>
     < />
   );

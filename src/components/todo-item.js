@@ -1,9 +1,5 @@
 const TodoItem = (props) => {
-  const {task, deleteItem} = props;
-
-  const deleteItem = (e) => {
-    console.log(e.target.parentElement);
-  }
+  const {task, deleteTask} = props;
 
   const statusItem = (e) => {
     console.log(e.target.parentElement)
@@ -12,8 +8,8 @@ const TodoItem = (props) => {
   return(
     <li className = "todo-item" id= {`item-${task.index}`}>
       <input  className="item-status" type = "checkbox" onClick = {statusItem} />
-      <span className="item-delete"> {task.description} </span>
-      <button className="item-delete" onClick = {deleteItem} > Delete </button>
+      <span className="item-description"> {task.description} </span>
+      <button className="item-delete" onClick = {deleteTask} > Delete </button>
     </li>
   );
 }
