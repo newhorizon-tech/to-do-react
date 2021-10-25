@@ -16,9 +16,7 @@ button {
   color: #e4e7eb;
   border: none;
   border-radius: none;
-  border-shadow: none;
 }
-
 
 #todo-list {
   display: flex;
@@ -29,19 +27,17 @@ button {
   list-style-type: none;
 }
 
-#todo-list .todo-item, #input-todo  {
-  margin: 5px 5px;
-  padding: 5px 5px;
+#input-todo,
+#todo-list .todo-item {
+  margin: 5px;
+  padding: 5px;
   display: grid;
-  grid-template-columns:  0.5fr 4fr 1fr;
+  grid-template-columns: 0.5fr 4fr 1fr;
 }
-
-
 /* button {
   padding: 5px;
   background-color: #162c35;
 } */
-
 #input-todo {
   grid-template-columns: 4fr 1fr;
   grid-gap: 5px;
