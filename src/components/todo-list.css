@@ -1,7 +1,7 @@
 :root {
   --blue: #094d82;
   --dark: #1f2933;
-  --green: #00897B;
+  --green: #00897b;
   --something: #162c35;
 }
 
@@ -15,7 +15,6 @@ button {
   background-color: var(--blue);
   color: #e4e7eb;
   border: none;
-  border-radius: none;
 }
 
 #todo-list {
@@ -34,6 +33,7 @@ button {
   display: grid;
   grid-template-columns: 0.5fr 4fr 1fr;
 }
+
 /* button {
   padding: 5px;
   background-color: #162c35;
