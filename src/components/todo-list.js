@@ -23,7 +23,10 @@ const TodoList = () => {
      inputElement.value = '';
 
      const newTask = {description : taskDescription, status: false };
-     setTasks(prevTasks => [...prevTasks, {...newTask, index: prevTasks.length +1}]);
+     setTasks(prevTasks => {
+       const maxIndex = Math.max.apply(Math, prevTasks.map(x => x.index));
+       return [...prevTasks, {...newTask, index: maxIndex +1}];
+     });
   }
 
   // Load from local storage
