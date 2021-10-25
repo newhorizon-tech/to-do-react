@@ -1,0 +1,27 @@
+h1 {
+  text-align: center;
+  width: 50%;
+  margin: 20px auto;
+}
+
+#todo-list {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  width: 500px;
+  padding: 5px 0;
+  border: 1px solid black;
+  list-style-type: none;
+}
+
+#todo-list .todo-item {
+  margin: 5px 5px;
+  padding: 5px 5px;
+  display: grid;
+  grid-template-columns:  0.5fr 4fr 1fr;
+}
+
+#todo-list .todo-item button {
+  padding: 5px;
+  background-color: white;
+}
