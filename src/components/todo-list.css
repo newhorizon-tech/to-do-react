@@ -10,6 +10,11 @@ body {
   color: white;
 }
 
+.white-bg {
+  background-color: white;
+  color: #1f2933; 
+}
+
 button {
   padding: 5px;
   background-color: var(--blue);

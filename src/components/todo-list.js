@@ -4,12 +4,7 @@ import InputTodo from './input-todo';
 import './todo-list.css';
 
 const TodoList = () => {
-  const initialTasks = [{ description: 'Item One', status: false, index: 1 },
-    { description: 'Item Two', status: false, index: 2 },
-    { description: 'Item Three', status: false, index: 3 },
-    { description: 'Item Four', status: false, index: 4 }];
-
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
 
   const deleteTask = (e) => {
     const taskId = Number(e.target.parentElement.id.split('-')[1]);
@@ -30,11 +25,39 @@ const TodoList = () => {
     });
   };
 
+  const editTask = (e) => {
+    const taskElement = e.target;
+    taskElement.contentEditable = false;
+    taskElement.classList.remove('white-bg');
+    const taskDescription = taskElement.textContent;
+    const taskId = Number(taskElement.parentElement.id.split('-')[1]);
+
+    setTasks((prevTasks) => {
+      const task = prevTasks.find((x) => x.index === taskId);
+      task.description = taskDescription;
+      return prevTasks;
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  };
+
+  const updateStatus = () => {};
+
   // Load from local storage
   useEffect(() => {
+    const url = 'https://jsonplaceholder.typicode.com/todos';
+    const fetchApi = async () => {
+      const response = await fetch(url);
+      const json = await response.json();
+      const initialTasks = json.slice(0, 10).map((old) => (
+        { description: old.title, index: old.id, status: old.completed }
+      ));
+      setTasks(initialTasks);
+    };
     const tasks = JSON.parse(localStorage.getItem('tasks'));
     if (tasks) {
       setTasks(tasks);
+    } else {
+      fetchApi();
     }
   }, []);
 
@@ -45,7 +68,15 @@ const TodoList = () => {
     <>
       <ul id="todo-list">
         <InputTodo addTask={addTask} />
-        {tasks.map((task) => (<TodoItem key={task.index} task={task} deleteTask={deleteTask} />))}
+        {tasks.map((task) => (
+          <TodoItem
+            key={task.index}
+            task={task}
+            editTask={editTask}
+            updateStatus={updateStatus}
+            deleteTask={deleteTask}
+          />
+        ))}
       </ul>
     < />
   );
