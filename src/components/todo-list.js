@@ -20,8 +20,7 @@ const TodoList = () => {
     const newTask = { description: taskDescription, status: false };
     setTasks((prevTasks) => {
       const indexes = prevTasks.map((x) => x.index);
-      const maxIndex = Math.max(...indexes);
-      console.log(maxIndex);
+      const maxIndex = prevTasks.length === 0 ? 0 : Math.max(...indexes);
       return [...prevTasks, { ...newTask, index: maxIndex + 1 }];
     });
   };
