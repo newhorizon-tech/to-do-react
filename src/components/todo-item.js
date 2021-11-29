@@ -18,7 +18,7 @@ const TodoItem = (props) => {
 
   return (
     <li className="todo-item" id={`item-${task.index}`}>
-      <input className="item-status" type="checkbox" onChange={updateStatus} />
+      <input className="item-status" key={task.status} type="checkbox" checked={task.status} onChange={updateStatus} />
       <span className="item-description" onDoubleClick={makeEditable}>
         {task.description}
       </span>

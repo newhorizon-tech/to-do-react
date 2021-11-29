@@ -21,6 +21,7 @@ const TodoList = () => {
     setTasks((prevTasks) => {
       const indexes = prevTasks.map((x) => x.index);
       const maxIndex = Math.max(...indexes);
+      console.log(maxIndex);
       return [...prevTasks, { ...newTask, index: maxIndex + 1 }];
     });
   };
@@ -40,7 +41,14 @@ const TodoList = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
-  const updateStatus = () => {};
+  const updateStatus = (e) => {
+    const taskId = Number(e.target.parentElement.id.split('-')[1]) - 1;
+    const items = [...tasks];
+    const item = { ...items[taskId] };
+    item.status = !item.status;
+    items[taskId] = item;
+    setTasks(items);
+  };
 
   // Load from local storage
   useEffect(() => {
@@ -65,20 +73,18 @@ const TodoList = () => {
   useEffect(() => localStorage.setItem('tasks', JSON.stringify(tasks)), [tasks]);
 
   return (
-    <>
-      <ul id="todo-list">
-        <InputTodo addTask={addTask} />
-        {tasks.map((task) => (
-          <TodoItem
-            key={task.index}
-            task={task}
-            editTask={editTask}
-            updateStatus={updateStatus}
-            deleteTask={deleteTask}
-          />
-        ))}
-      </ul>
-    < />
+    <ul id="todo-list">
+      <InputTodo addTask={addTask} />
+      {tasks.map((task) => (
+        <TodoItem
+          key={task.index}
+          task={task}
+          editTask={editTask}
+          updateStatus={updateStatus}
+          deleteTask={deleteTask}
+        />
+      ))}
+    </ul>
   );
 };
 
