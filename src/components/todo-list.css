@@ -10,10 +10,19 @@ body {
   color: white;
 }
 
-.white-bg {
+span[class*="edit-true"] {
+  display: none;
+}
+
+input[class*="edit-true"] {
   background-color: white;
   color: #1f2933;
 }
+
+input[class*="edit-false"] {
+ display: none;
+}
+
 
 button {
   padding: 5px;

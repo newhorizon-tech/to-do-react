@@ -25,28 +25,22 @@ const TodoList = () => {
     });
   };
 
-  const editTask = (e) => {
-    const taskElement = e.target;
-    taskElement.contentEditable = false;
-    taskElement.classList.remove('white-bg');
-    const taskDescription = taskElement.textContent;
-    const taskId = Number(taskElement.parentElement.id.split('-')[1]);
-
+  const editTask = (taskDescription, taskId) => {
     setTasks((prevTasks) => {
-      const task = prevTasks.find((x) => x.index === taskId);
+      const newTasks = [...prevTasks];
+      const task = newTasks.find((x) => x.index === taskId);
       task.description = taskDescription;
-      return prevTasks;
+      return newTasks;
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
-  const updateStatus = (e) => {
-    const taskId = Number(e.target.parentElement.id.split('-')[1]) - 1;
-    const items = [...tasks];
-    const item = { ...items[taskId] };
-    item.status = !item.status;
-    items[taskId] = item;
-    setTasks(items);
+  const updateStatus = (e, taskId) => {
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks];
+      const task = newTasks.find((x) => x.index === taskId);
+      task.status = !task.status;
+      return newTasks;
+    });
   };
 
   // Load from local storage
