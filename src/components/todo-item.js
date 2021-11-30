@@ -20,10 +20,17 @@ const TodoItem = (props) => {
 
   return (
     <li className="todo-item" id={`item-${task.index}`}>
-      <input className="item-status" key={task.status} type="checkbox" checked={task.status}
-             onChange={e => updateStatus(e,task.index)} />             
-      <span  className={`item-description edit-${editMode.value.toString()}`}
-        onDoubleClick={(e) => startEdit(e.target.value, task.index)}  />
+      <input
+        className="item-status"
+        key={task.status}
+        type="checkbox"
+        checked={task.status}
+        onChange={(e) => updateStatus(e, task.index)}
+      />
+      <span
+        className={`item-description edit-${editMode.value.toString()}`}
+        onDoubleClick={(e) => startEdit(e.target.value, task.index)}
+      >
         {task.description}
       </span>
       <input
