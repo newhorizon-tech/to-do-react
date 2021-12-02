@@ -28,7 +28,7 @@ const TodoItem = (props) => {
         onChange={(e) => updateStatus(e, task.index)}
       />
       <span
-        className={`item-description edit-${editMode.value.toString()}`}
+        className={`item-description edit-${editMode.value.toString()} ${task.status ? 'task-done' : ''}`}
         onDoubleClick={(e) => startEdit(e.target.value, task.index)}
       >
         {task.description}

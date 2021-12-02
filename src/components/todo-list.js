@@ -35,12 +35,10 @@ const TodoList = () => {
   };
 
   const updateStatus = (e, taskId) => {
-    setTasks((prevTasks) => {
-      const newTasks = [...prevTasks];
-      const task = newTasks.find((x) => x.index === taskId);
-      task.status = !task.status;
-      return newTasks;
-    });
+    const newTasks = [...tasks];
+    const task = newTasks.find((x) => x.index === taskId);
+    task.status = !task.status;
+    setTasks(newTasks);
   };
 
   // Load from local storage

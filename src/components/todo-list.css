@@ -23,6 +23,10 @@ input[class*="edit-false"] {
   display: none;
 }
 
+.task-done {
+  text-decoration: line-through;
+}
+
 button {
   padding: 5px;
   background-color: var(--blue);
