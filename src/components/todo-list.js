@@ -4,12 +4,7 @@ import InputTodo from './input-todo';
 import './todo-list.css';
 
 const TodoList = () => {
-  const initialTasks = [{ description: 'Item One', status: false, index: 1 },
-    { description: 'Item Two', status: false, index: 2 },
-    { description: 'Item Three', status: false, index: 3 },
-    { description: 'Item Four', status: false, index: 4 }];
-
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
 
   const deleteTask = (e) => {
     const taskId = Number(e.target.parentElement.id.split('-')[1]);
@@ -25,16 +20,43 @@ const TodoList = () => {
     const newTask = { description: taskDescription, status: false };
     setTasks((prevTasks) => {
       const indexes = prevTasks.map((x) => x.index);
-      const maxIndex = Math.max(...indexes);
+      const maxIndex = prevTasks.length === 0 ? 0 : Math.max(...indexes);
       return [...prevTasks, { ...newTask, index: maxIndex + 1 }];
     });
   };
 
+  const editTask = (taskDescription, taskId) => {
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks];
+      const task = newTasks.find((x) => x.index === taskId);
+      task.description = taskDescription;
+      return newTasks;
+    });
+  };
+
+  const updateStatus = (e, taskId) => {
+    const newTasks = [...tasks];
+    const task = newTasks.find((x) => x.index === taskId);
+    task.status = !task.status;
+    setTasks(newTasks);
+  };
+
   // Load from local storage
   useEffect(() => {
+    const url = 'https://jsonplaceholder.typicode.com/todos';
+    const fetchApi = async () => {
+      const response = await fetch(url);
+      const json = await response.json();
+      const initialTasks = json.slice(0, 10).map((old) => (
+        { description: old.title, index: old.id, status: old.completed }
+      ));
+      setTasks(initialTasks);
+    };
     const tasks = JSON.parse(localStorage.getItem('tasks'));
     if (tasks) {
       setTasks(tasks);
+    } else {
+      fetchApi();
     }
   }, []);
 
@@ -42,12 +64,18 @@ const TodoList = () => {
   useEffect(() => localStorage.setItem('tasks', JSON.stringify(tasks)), [tasks]);
 
   return (
-    <>
-      <ul id="todo-list">
-        <InputTodo addTask={addTask} />
-        {tasks.map((task) => (<TodoItem key={task.index} task={task} deleteTask={deleteTask} />))}
-      </ul>
-    < />
+    <ul id="todo-list">
+      <InputTodo addTask={addTask} />
+      {tasks.map((task) => (
+        <TodoItem
+          key={task.index}
+          task={task}
+          editTask={editTask}
+          updateStatus={updateStatus}
+          deleteTask={deleteTask}
+        />
+      ))}
+    </ul>
   );
 };
 

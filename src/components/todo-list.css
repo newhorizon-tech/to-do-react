@@ -10,6 +10,23 @@ body {
   color: white;
 }
 
+span[class*="edit-true"] {
+  display: none;
+}
+
+input[class*="edit-true"] {
+  background-color: white;
+  color: #1f2933;
+}
+
+input[class*="edit-false"] {
+  display: none;
+}
+
+.task-done {
+  text-decoration: line-through;
+}
+
 button {
   padding: 5px;
   background-color: var(--blue);

@@ -5,6 +5,12 @@ To Do List is a Single Page Application built in React
 ## Features
 
 - Add todo list tasks
+- Remove tasks
+- Mark tasks as completed
+
+## Live Demo
+
+[Live Demo Link](https://newhorizon-tech.github.io/to-do-react/)
 
 ## Built With
 
